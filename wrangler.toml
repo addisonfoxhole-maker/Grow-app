@@ -1,0 +1,15 @@
+# Addison Garden — sync Worker config
+# After `wrangler d1 create addison-garden`, paste the printed database_id below.
+
+name = "addison-garden-sync"
+main = "worker.js"
+compatibility_date = "2024-11-01"
+
+[[d1_databases]]
+binding = "DB"                 # the app reads/writes env.DB — keep this name
+database_name = "addison-garden"
+database_id = "PASTE_DATABASE_ID_HERE"
+
+# Secrets are NOT set here. Set them once with:
+#   wrangler secret put GROW_PASSCODE
+#   wrangler secret put AUTH_SECRET
