@@ -1,15 +1,19 @@
-# Addison Garden — sync Worker config
-# After `wrangler d1 create addison-garden`, paste the printed database_id below.
-
-name = "addison-garden-sync"
+name = "grow-app"
 main = "worker.js"
-compatibility_date = "2024-11-01"
+compatibility_date = "2026-07-01"
+workers_dev = true
 
+# Shared-grow state (JSON blob + rev) and family accounts live here.
 [[d1_databases]]
-binding = "DB"                 # the app reads/writes env.DB — keep this name
-database_name = "addison-garden"
-database_id = "PASTE_DATABASE_ID_HERE"
+binding = "DB"
+database_name = "growapp"
+database_id = "d3bcd886-d02f-4d1f-8e13-eba8638d1d42"
 
-# Secrets are NOT set here. Set them once with:
-#   wrangler secret put GROW_PASSCODE
+# Photos (data-URL text, one object per photo id).
+[[r2_buckets]]
+binding = "PHOTOS"
+bucket_name = "growapp-photos"
+
+# Secrets are NOT stored here. Set them once with:
+#   wrangler secret put FAMILY_CODE
 #   wrangler secret put AUTH_SECRET
