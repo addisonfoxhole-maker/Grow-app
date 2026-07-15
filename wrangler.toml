@@ -3,7 +3,12 @@ main = "worker.js"
 compatibility_date = "2026-07-01"
 workers_dev = true
 
-# Shared-grow state (JSON blob + rev) and family accounts live here.
+# Serve the app itself (index.html, service worker, icons) from this same Worker,
+# so grow-app.addisonfoxhole.workers.dev shows the app at "/" and the API at "/api/*".
+[assets]
+directory = "."
+
+# Shared-grow state (JSON blob + rev) and family accounts.
 [[d1_databases]]
 binding = "DB"
 database_name = "growapp"
@@ -14,6 +19,6 @@ database_id = "d3bcd886-d02f-4d1f-8e13-eba8638d1d42"
 binding = "PHOTOS"
 bucket_name = "growapp-photos"
 
-# Secrets are NOT stored here. Set them once with:
-#   wrangler secret put FAMILY_CODE
-#   wrangler secret put AUTH_SECRET
+# Secrets are NEVER put here (this repo is public). Set them once in the dashboard:
+#   grow-app  >  Settings  >  Variables and secrets  >  Add  >  Secret
+#   AUTH_SECRET  and  FAMILY_CODE
